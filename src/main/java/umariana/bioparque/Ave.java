@@ -8,21 +8,12 @@ package umariana.bioparque;
  *
  * @author esteb
  */
-public class Ave extends Animal {
+public class Ave extends Animal implements Alimentable {
 
     private double envergadura;
 
-    public Ave() {
-    }
-
-    public Ave(String codigo, String nombre, int edad, double peso,
-               String sexo, String estadoSalud, String estadoInventario,
-               String fechaIngreso, String habitatAsignado,
-               double envergadura) {
-
-        super(codigo, nombre, edad, peso, sexo, estadoSalud,
-              estadoInventario, fechaIngreso, habitatAsignado);
-
+    public Ave(String codigo, String nombre, int edad, double peso,String sexo, String estadoSalud, String estadoInventario,String fechaIngreso, String habitatAsignado,double envergadura) {
+        super(codigo, nombre, edad, peso, sexo, estadoSalud,estadoInventario, fechaIngreso, habitatAsignado);
         this.envergadura = envergadura;
     }
 
@@ -32,5 +23,16 @@ public class Ave extends Animal {
 
     public void setEnvergadura(double envergadura) {
         this.envergadura = envergadura;
+    }
+
+    @Override
+    public String emitirSonido() {
+        return "Canta o emite un trino.";
+    }
+
+    @Override
+    public double calcularRacionDiaria() {
+
+        return getPeso() * 0.10;
     }
 }

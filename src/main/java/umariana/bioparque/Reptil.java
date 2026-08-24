@@ -8,21 +8,12 @@ package umariana.bioparque;
  *
  * @author esteb
  */
-public class Reptil extends Animal {
+public class Reptil extends Animal implements Alimentable {
 
     private String tipoEscamas;
 
-    public Reptil() {
-    }
-
-    public Reptil(String codigo, String nombre, int edad, double peso,
-                  String sexo, String estadoSalud, String estadoInventario,
-                  String fechaIngreso, String habitatAsignado,
-                  String tipoEscamas) {
-
-        super(codigo, nombre, edad, peso, sexo, estadoSalud,
-              estadoInventario, fechaIngreso, habitatAsignado);
-
+    public Reptil(String codigo, String nombre, int edad, double peso,String sexo, String estadoSalud, String estadoInventario,String fechaIngreso, String habitatAsignado,String tipoEscamas) {
+        super(codigo, nombre, edad, peso, sexo, estadoSalud,estadoInventario, fechaIngreso, habitatAsignado);
         this.tipoEscamas = tipoEscamas;
     }
 
@@ -32,5 +23,15 @@ public class Reptil extends Animal {
 
     public void setTipoEscamas(String tipoEscamas) {
         this.tipoEscamas = tipoEscamas;
+    }
+
+    @Override
+    public String emitirSonido() {
+        return "Silba o no emite sonido audible (segun la especie).";
+    }
+
+    @Override
+    public double calcularRacionDiaria() {
+        return getPeso() * 0.01;
     }
 }

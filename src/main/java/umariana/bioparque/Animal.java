@@ -8,24 +8,29 @@ package umariana.bioparque;
  *
  * @author esteb
  */
-public class Animal {
+public abstract class Animal {
 
-    private String codigo;
+    private final String codigo;
     private String nombre;
     private int edad;
     private double peso;
     private String sexo;
     private String estadoSalud;
     private String estadoInventario;
-    private String fechaIngreso;
+    private final String fechaIngreso;
     private String habitatAsignado;
 
-    public Animal() {
-    }
+    public Animal(String codigo, String nombre, int edad, double peso,String sexo, String estadoSalud, String estadoInventario,String fechaIngreso, String habitatAsignado) {
 
-    public Animal(String codigo, String nombre, int edad, double peso,
-                  String sexo, String estadoSalud, String estadoInventario,
-                  String fechaIngreso, String habitatAsignado) {
+        if (codigo == null || codigo.isBlank()) {
+            throw new IllegalArgumentException("El codigo no puede estar vacio.");
+        }
+        if (edad < 0) {
+            throw new IllegalArgumentException("La edad no puede ser negativa.");
+        }
+        if (peso < 0) {
+            throw new IllegalArgumentException("El peso no puede ser negativo.");
+        }
 
         this.codigo = codigo;
         this.nombre = nombre;
@@ -37,6 +42,16 @@ public class Animal {
         this.fechaIngreso = fechaIngreso;
         this.habitatAsignado = habitatAsignado;
     }
+
+    public abstract String emitirSonido();
+
+    public String resumenBasico() {
+        return "Codigo: " + codigo
+                + " | Nombre: " + nombre
+                + " | Categoria: " + this.getClass().getSimpleName()
+                + " | Estado: " + estadoInventario;
+    }
+
 
     public String getCodigo() {
         return codigo;
@@ -72,5 +87,38 @@ public class Animal {
 
     public String getHabitatAsignado() {
         return habitatAsignado;
+    }
+
+    
+    public void actualizarPeso(double nuevoPeso) {
+        if (nuevoPeso < 0) {
+            throw new IllegalArgumentException("El peso no puede ser negativo.");
+        }
+        this.peso = nuevoPeso;
+    }
+
+    public void actualizarEstadoSalud(String nuevoEstadoSalud) {
+        if (nuevoEstadoSalud == null || nuevoEstadoSalud.isBlank()) {
+            throw new IllegalArgumentException("El estado de salud no puede estar vacio.");
+        }
+        this.estadoSalud = nuevoEstadoSalud;
+    }
+
+    public void trasladarHabitat(String nuevoHabitat) {
+        if (nuevoHabitat == null || nuevoHabitat.isBlank()) {
+            throw new IllegalArgumentException("El habitat no puede estar vacio.");
+        }
+        this.habitatAsignado = nuevoHabitat;
+    }
+
+    public void ponerEnObservacion() {
+        if ("RETIRADO".equalsIgnoreCase(this.estadoInventario)) {
+            throw new IllegalStateException("No se puede observar un animal retirado.");
+        }
+        this.estadoInventario = "EN_OBSERVACION";
+    }
+
+    public void retirar() {
+        this.estadoInventario = "RETIRADO";
     }
 }
