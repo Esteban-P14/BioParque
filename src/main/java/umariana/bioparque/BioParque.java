@@ -18,7 +18,7 @@ public class BioParque {
         Scanner lector = new Scanner(System.in);
 
         InventarioAnimales inventario = new InventarioAnimales();
-        
+
 
         int opcion;
 
@@ -31,6 +31,8 @@ public class BioParque {
             System.out.println("4. Actualizar animal");
             System.out.println("5. Retirar animal");
             System.out.println("6. Filtrar animales por categoria");
+            System.out.println("7. Ejecutar comportamiento de todos los animales");
+            System.out.println("8. Ver resumen total y conteo por categoria");
             System.out.println("0. Salir");
 
             opcion = leerEntero(lector, "Seleccione una opcion:");
@@ -48,6 +50,10 @@ public class BioParque {
                 case 5 -> retirarAnimal(lector, inventario);
 
                 case 6 -> filtrarAnimales(lector, inventario);
+
+                case 7 -> ejecutarComportamientos(inventario);
+
+                case 8 -> mostrarResumen(inventario);
 
                 case 0 -> System.out.println("Usted ha salido del sistema.");
 
@@ -255,6 +261,18 @@ public class BioParque {
                 System.out.println(a.resumenBasico());
             }
         }
+    }
+
+   
+    private static void ejecutarComportamientos(InventarioAnimales inventario) {
+        System.out.println("====== COMPORTAMIENTO DE TODOS LOS ANIMALES ======");
+        inventario.ejecutarComportamientos();
+    }
+
+ 
+    private static void mostrarResumen(InventarioAnimales inventario) {
+        System.out.println("====== RESUMEN DEL INVENTARIO ======");
+        System.out.println(inventario.generarResumen());
     }
 
     private static void imprimirAnimal(Animal a) {

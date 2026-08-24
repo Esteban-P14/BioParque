@@ -1,6 +1,7 @@
 umariana\bioparque\Animal.class
 umariana\bioparque\Mamifero.class
 umariana\bioparque\InventarioAnimales.class
+umariana\bioparque\Alimentable.class
 umariana\bioparque\Ave.class
 umariana\bioparque\BioParque.class
 umariana\bioparque\Reptil.class
